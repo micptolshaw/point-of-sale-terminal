@@ -23,7 +23,7 @@ namespace PointOfSale.Model
 
         public bool Equals(ProductCode other)
         {
-            return Value.Equals(other.Value);
+            return other is not null && Value.Equals(other.Value);
         }
 
         public static bool operator ==(ProductCode a, ProductCode b)
