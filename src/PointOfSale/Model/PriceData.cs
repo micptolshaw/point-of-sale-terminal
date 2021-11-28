@@ -18,7 +18,7 @@ namespace PointOfSale.Model
             return PriceList;
         }
 
-        public IEnumerable<ItemPriceData> GetPriceListForItemCode(char itemCode)
+        public IEnumerable<ItemPriceData> GetPriceListForItemCode(ItemCode itemCode)
         {
             return GetPriceList().Where(x => x.ItemCode == itemCode);
         }

@@ -5,16 +5,16 @@ namespace PointOfSale.Model
 {
     public class Order
     {
-        private Dictionary<char, int> ItemTotalsDictionary { get; }
+        private Dictionary<ItemCode, int> ItemTotalsDictionary { get; }
 
 
         public Order()
         {
-            ItemTotalsDictionary = new Dictionary<char, int>();
+            ItemTotalsDictionary = new Dictionary<ItemCode, int>();
         }
 
 
-        public void Add(char itemCode)
+        public void Add(ItemCode itemCode)
         {
             if (HasItem(itemCode))
             {
@@ -26,32 +26,32 @@ namespace PointOfSale.Model
             }
         }
 
-        public IEnumerable<char> Items()
+        public IEnumerable<ItemCode> Items()
         {
             return ItemTotalsDictionary.Keys;
         }
 
-        public int GetItemCount(char itemCode)
+        public int GetItemCount(ItemCode itemCode)
         {
             return HasItem(itemCode) ? GetItemCountImpl(itemCode) : 0;
         }
 
-        private bool HasItem(char itemCode)
+        private bool HasItem(ItemCode itemCode)
         { 
             return ItemTotalsDictionary.Keys.Contains(itemCode);
         }
 
-        private void IncreaseItemCount(char itemCode)
+        private void IncreaseItemCount(ItemCode itemCode)
         {
             ItemTotalsDictionary[itemCode] = ItemTotalsDictionary[itemCode] + 1;
         }
 
-        private void SetItemCountToOne(char itemCode)
+        private void SetItemCountToOne(ItemCode itemCode)
         {
             ItemTotalsDictionary[itemCode] = 1;
         }
 
-        private int GetItemCountImpl(char itemCode)
+        private int GetItemCountImpl(ItemCode itemCode)
         {
             return ItemTotalsDictionary[itemCode];
         }

@@ -16,17 +16,19 @@ namespace PointOfSale
 
         public decimal CalculateTotal()
         {
-            return PriceCalculator.Calculate(PriceData, Order);
+            return OrderCalculator.Calculate(PriceData, Order);
         }
 
 
-        public void ScanProduct(char productCode)
+        public void ScanProduct(ItemCode itemCode)
         {
-            Order.Add(productCode);
+            //!TODO: need to validate productCode
+            Order.Add(itemCode);
         }
 
         public void SetPricing(PriceData priceData)
         {
+            //!TODO: need to validate priceData
             PriceData = priceData;
         }
     }

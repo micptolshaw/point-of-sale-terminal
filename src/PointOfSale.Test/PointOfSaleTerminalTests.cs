@@ -20,7 +20,7 @@ namespace PointOfSale.Test
             terminal.SetPricing(priceData);
             foreach (var item in shoppingList)
             {
-                terminal.ScanProduct(item);
+                terminal.ScanProduct(new ItemCode(item));
             }
             var calculatedPrice = terminal.CalculateTotal();
 

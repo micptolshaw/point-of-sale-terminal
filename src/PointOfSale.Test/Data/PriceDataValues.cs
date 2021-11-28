@@ -10,12 +10,12 @@ namespace PointOfSale.Test.Data
 
         public IEnumerator<ItemPriceData> GetEnumerator()
         {
-            yield return new ItemPriceData('A', 1, new decimal(1.25));
-            yield return new ItemPriceData('A', 3, new decimal(3.00));
-            yield return new ItemPriceData('B', 1, new decimal(4.25));
-            yield return new ItemPriceData('C', 1, new decimal(1.00));
-            yield return new ItemPriceData('C', 6, new decimal(5.00));
-            yield return new ItemPriceData('D', 1, new decimal(0.75));
+            yield return new ItemPriceData(new ItemCode('A'), 1, new decimal(1.25));
+            yield return new ItemPriceData(new ItemCode('A'), 3, new decimal(3.00));
+            yield return new ItemPriceData(new ItemCode('B'), 1, new decimal(4.25));
+            yield return new ItemPriceData(new ItemCode('C'), 1, new decimal(1.00));
+            yield return new ItemPriceData(new ItemCode('C'), 6, new decimal(5.00));
+            yield return new ItemPriceData(new ItemCode('D'), 1, new decimal(0.75));
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
