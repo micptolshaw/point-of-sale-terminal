@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using PointOfSale.Model;
 using Xunit;
 using PointOfSale.Test.Data;
 
@@ -11,12 +13,15 @@ namespace PointOfSale.Test
         {
             //  Prepare
             var terminal = new PointOfSaleTerminal();
-            foreach(var item in shoppingList)
+            var priceDataValues = new List<ItemPriceData>(new PriceDataValues());
+            var priceData = new PriceData(priceDataValues);
+
+            // Act
+            terminal.SetPricing(priceData);
+            foreach (var item in shoppingList)
             {
                 terminal.ScanProduct(item);
             }
-
-            // Act
             var calculatedPrice = terminal.CalculateTotal();
 
             // Assert

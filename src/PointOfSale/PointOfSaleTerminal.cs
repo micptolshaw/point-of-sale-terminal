@@ -1,13 +1,33 @@
-﻿using System;
+﻿using PointOfSale.BusinessRules;
+using PointOfSale.Model;
 
 namespace PointOfSale
 {
-    public class PointOfSaleTerminal : IPointOfSaleTerminal
+    public class PointOfSaleTerminal
     {
-        public decimal CalculateTotal() => throw new NotImplementedException();
+        private PriceData PriceData { get; set; }
 
-        public void ScanProduct(char productCode) => throw new NotImplementedException();
+        private Order Order { get; }
 
-        public void SetPricing() => throw new NotImplementedException();
+        public PointOfSaleTerminal()
+        {
+            Order = new Order();
+        }
+
+        public decimal CalculateTotal()
+        {
+            return PriceCalculator.Calculate(PriceData, Order);
+        }
+
+
+        public void ScanProduct(char productCode)
+        {
+            Order.Add(productCode);
+        }
+
+        public void SetPricing(PriceData priceData)
+        {
+            PriceData = priceData;
+        }
     }
 }
