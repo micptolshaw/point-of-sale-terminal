@@ -5,7 +5,7 @@ using PointOfSale.Model;
 
 namespace PointOfSale.BusinessRules
 {
-    public static class PriceCalculator
+    public static class OrderCalculator
     {
         public static decimal Calculate(PriceData priceData, Order order)
         {
@@ -18,10 +18,7 @@ namespace PointOfSale.BusinessRules
         private static decimal CalculateCheapestPrice(IEnumerable<ItemPriceData> itemPriceDataEnumerable, int itemCount)
         {
            var cheapestFirst = itemPriceDataEnumerable.OrderBy(itemPriceData => itemPriceData.PricePerItem);
-
            var cheapestPrice = cheapestFirst.Aggregate( new Tuple<decimal, int>(new decimal(0), itemCount), CalculateItemCostAndUpdateState);
-
-           if (cheapestPrice.Item2 > 0) throw new Exception();
 
            return cheapestPrice.Item1;
         }
