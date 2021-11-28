@@ -2,18 +2,18 @@
 
 namespace PointOfSale.Model
 {
-    public class ItemCode : IEquatable<ItemCode>
+    public class ProductCode : IEquatable<ProductCode>
     {
         public char Value { get; }
 
-        public ItemCode(char value)
+        public ProductCode(char value)
         {
             Value = value;
         }
 
         public override bool Equals(object obj)
         {
-            return Equals(obj as ItemCode);
+            return Equals(obj as ProductCode);
         }
 
         public override int GetHashCode()
@@ -21,17 +21,17 @@ namespace PointOfSale.Model
             return Value.GetHashCode();
         }
 
-        public bool Equals(ItemCode other)
+        public bool Equals(ProductCode other)
         {
             return Value.Equals(other.Value);
         }
 
-        public static bool operator ==(ItemCode a, ItemCode b)
+        public static bool operator ==(ProductCode a, ProductCode b)
         {
             return Equals(a, b);
         }
 
-        public static bool operator !=(ItemCode a, ItemCode b)
+        public static bool operator !=(ProductCode a, ProductCode b)
         {
             return !Equals(a, b);
         }

@@ -5,55 +5,55 @@ namespace PointOfSale.Model
 {
     public class Order
     {
-        private Dictionary<ItemCode, int> ItemTotalsDictionary { get; }
+        private Dictionary<ProductCode, int> ItemTotalsDictionary { get; }
 
 
         public Order()
         {
-            ItemTotalsDictionary = new Dictionary<ItemCode, int>();
+            ItemTotalsDictionary = new Dictionary<ProductCode, int>();
         }
 
 
-        public void Add(ItemCode itemCode)
+        public void Add(ProductCode productCode)
         {
-            if (HasItem(itemCode))
+            if (HasItem(productCode))
             {
-                IncreaseItemCount(itemCode);
+                IncreaseItemCount(productCode);
             }
             else
             {
-                SetItemCountToOne(itemCode);
+                SetItemCountToOne(productCode);
             }
         }
 
-        public IEnumerable<ItemCode> Items()
+        public IEnumerable<ProductCode> Items()
         {
             return ItemTotalsDictionary.Keys;
         }
 
-        public int GetItemCount(ItemCode itemCode)
+        public int GetItemCount(ProductCode productCode)
         {
-            return HasItem(itemCode) ? GetItemCountImpl(itemCode) : 0;
+            return HasItem(productCode) ? GetItemCountImpl(productCode) : 0;
         }
 
-        private bool HasItem(ItemCode itemCode)
+        private bool HasItem(ProductCode productCode)
         { 
-            return ItemTotalsDictionary.Keys.Contains(itemCode);
+            return ItemTotalsDictionary.Keys.Contains(productCode);
         }
 
-        private void IncreaseItemCount(ItemCode itemCode)
+        private void IncreaseItemCount(ProductCode productCode)
         {
-            ItemTotalsDictionary[itemCode] = ItemTotalsDictionary[itemCode] + 1;
+            ItemTotalsDictionary[productCode] = ItemTotalsDictionary[productCode] + 1;
         }
 
-        private void SetItemCountToOne(ItemCode itemCode)
+        private void SetItemCountToOne(ProductCode productCode)
         {
-            ItemTotalsDictionary[itemCode] = 1;
+            ItemTotalsDictionary[productCode] = 1;
         }
 
-        private int GetItemCountImpl(ItemCode itemCode)
+        private int GetItemCountImpl(ProductCode productCode)
         {
-            return ItemTotalsDictionary[itemCode];
+            return ItemTotalsDictionary[productCode];
         }
     }
 }

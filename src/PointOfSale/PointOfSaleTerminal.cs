@@ -20,10 +20,10 @@ namespace PointOfSale
         }
 
 
-        public void ScanProduct(ItemCode itemCode)
+        public void ScanProduct(ProductCode productCode)
         {
             //!TODO: need to validate productCode
-            Order.Add(itemCode);
+            Order.Add(productCode);
         }
 
         public void SetPricing(PriceData priceData)
