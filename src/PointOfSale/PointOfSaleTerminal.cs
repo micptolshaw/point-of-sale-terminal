@@ -1,34 +1,42 @@
-﻿using PointOfSale.BusinessRules;
+﻿using System.Diagnostics.CodeAnalysis;
+using PointOfSale.BusinessRules;
 using PointOfSale.Model;
+using PointOfSale.Validators;
 
 namespace PointOfSale
 {
     public class PointOfSaleTerminal
     {
         private PriceData PriceData { get; set; }
+        private ProductCodeValidator ProductCodeValidator { get; }
+        private PriceDataValidator PriceValidator { get; }
 
-        private Order Order { get; }
-
-        public PointOfSaleTerminal()
+        public PointOfSaleTerminal([NotNull] ProductCodeValidator productCodeValidator, [NotNull] PriceDataValidator priceValidator)
         {
-            Order = new Order();
+            ProductCodeValidator = productCodeValidator;
+            PriceValidator = priceValidator;
         }
 
-        public decimal CalculateTotal()
+        public Order NextCustomer()
         {
-            return OrderCalculator.Calculate(PriceData, Order);
+            return new Order();
+        }
+
+        public decimal CalculateTotal([NotNull] Order order)
+        {
+            return OrderCalculator.Calculate(PriceData, order);
         }
 
 
-        public void ScanProduct(ProductCode productCode)
+        public void ScanProduct([NotNull] Order order, [NotNull] ProductCode productCode)
         {
-            //!TODO: need to validate productCode
-            Order.Add(productCode);
+            ProductCodeValidator.Validate(productCode);
+            order.Add(productCode);
         }
 
-        public void SetPricing(PriceData priceData)
+        public void SetPricing([NotNull] PriceData priceData)
         {
-            //!TODO: need to validate priceData
+            PriceValidator.Validate(priceData);
             PriceData = priceData;
         }
     }

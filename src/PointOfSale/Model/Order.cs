@@ -8,7 +8,7 @@ namespace PointOfSale.Model
         private Dictionary<ProductCode, int> ItemTotalsDictionary { get; }
 
 
-        public Order()
+        internal Order()
         {
             ItemTotalsDictionary = new Dictionary<ProductCode, int>();
         }

@@ -1,7 +1,7 @@
-using System.Collections.Generic;
 using PointOfSale.Model;
 using Xunit;
 using PointOfSale.Test.Data;
+using PointOfSale.Validators;
 
 namespace PointOfSale.Test
 {
@@ -12,17 +12,19 @@ namespace PointOfSale.Test
         public void ComparePrices(string shoppingList, decimal validatePrice, bool validatePriceValid)
         {
             //  Prepare
-            var terminal = new PointOfSaleTerminal();
-            var priceDataValues = new List<ItemPriceData>(new PriceDataValues());
-            var priceData = new PriceData(priceDataValues);
+            var productCodeValidator = new ProductCodeValidator(new ValidProductCodes());
+            var terminal = new PointOfSaleTerminal(productCodeValidator, new PriceDataValidator());
+            var priceData = new PriceData(new PriceDataValues());
 
             // Act
             terminal.SetPricing(priceData);
+            var order = terminal.NextCustomer();
+
             foreach (var item in shoppingList)
             {
-                terminal.ScanProduct(new ProductCode(item));
+                terminal.ScanProduct(order, new ProductCode(item));
             }
-            var calculatedPrice = terminal.CalculateTotal();
+            var calculatedPrice = terminal.CalculateTotal(order);
 
             // Assert
             Assert.Equal(validatePriceValid, calculatedPrice == validatePrice);
