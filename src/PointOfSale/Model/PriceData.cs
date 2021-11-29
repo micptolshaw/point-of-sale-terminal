@@ -5,20 +5,20 @@ namespace PointOfSale.Model
 {
     public class PriceData
     {
-        private List<ItemPriceData> PriceList { get; }
+        private List<ProductPriceData> PriceList { get; }
 
 
-        public PriceData(IEnumerable<ItemPriceData> priceList)
+        public PriceData(IEnumerable<ProductPriceData> priceList)
         {
-            PriceList = new List<ItemPriceData>(priceList);
+            PriceList = new List<ProductPriceData>(priceList);
         }
 
-        public IEnumerable<ItemPriceData> GetPriceList()
+        public IEnumerable<ProductPriceData> GetPriceList()
         {
             return PriceList;
         }
 
-        public IEnumerable<ItemPriceData> GetPriceListForItemCode(ProductCode productCode)
+        public IEnumerable<ProductPriceData> GetPriceListForItemCode(ProductCode productCode)
         {
             return GetPriceList().Where(x => x.ProductCode == productCode);
         }

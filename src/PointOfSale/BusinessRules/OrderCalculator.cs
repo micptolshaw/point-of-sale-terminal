@@ -15,7 +15,7 @@ namespace PointOfSale.BusinessRules
 
         }
 
-        private static decimal CalculateCheapestPrice(IEnumerable<ItemPriceData> itemPriceDataEnumerable, int itemCount)
+        private static decimal CalculateCheapestPrice(IEnumerable<ProductPriceData> itemPriceDataEnumerable, int itemCount)
         {
            var cheapestFirst = itemPriceDataEnumerable.OrderBy(itemPriceData => itemPriceData.PricePerItem);
            var cheapestPrice = cheapestFirst.Aggregate( new Tuple<decimal, int>(new decimal(0), itemCount), CalculateItemCostAndUpdateState);
@@ -24,18 +24,18 @@ namespace PointOfSale.BusinessRules
         }
 
 
-        private static Tuple<decimal, int> CalculateItemCostAndUpdateState(Tuple<decimal, int> state, ItemPriceData itemPriceData)
+        private static Tuple<decimal, int> CalculateItemCostAndUpdateState(Tuple<decimal, int> state, ProductPriceData productPriceData)
         {
-            var costData = CalculateItemCost(itemPriceData, state.Item2);
+            var costData = CalculateItemCost(productPriceData, state.Item2);
             return new Tuple<decimal, int>(state.Item1 + costData.Item1, state.Item2 - costData.Item2);
         }
 
-        private static Tuple<decimal, int> CalculateItemCost(ItemPriceData itemPriceData, int itemCount)
+        private static Tuple<decimal, int> CalculateItemCost(ProductPriceData productPriceData, int itemCount)
         {
-            int units = (itemCount / itemPriceData.Quantity);
+            int units = (itemCount / productPriceData.Quantity);
             return new Tuple<decimal, int>(
-                itemPriceData.Price * units,
-                itemPriceData.Quantity * units 
+                productPriceData.Price * units,
+                productPriceData.Quantity * units 
             );
         }
     }

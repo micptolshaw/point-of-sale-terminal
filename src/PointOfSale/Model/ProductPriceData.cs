@@ -1,6 +1,6 @@
 ﻿namespace PointOfSale.Model
 {
-    public class ItemPriceData
+    public class ProductPriceData
     {
         public ProductCode ProductCode { get; }
 
@@ -10,7 +10,7 @@
 
         public decimal PricePerItem { get; }
 
-        public ItemPriceData(ProductCode productCode, int quantity, decimal price)
+        public ProductPriceData(ProductCode productCode, int quantity, decimal price)
         {
             ProductCode = productCode;
             Quantity = quantity;
