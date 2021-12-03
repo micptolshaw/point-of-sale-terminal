@@ -1,5 +1,25 @@
 # point-of-sale-terminal
 
+
+## Implementation
+The software is written in C#, using Visual Studio 2019, with JetBrains ReSharper to ensure a consistent coding style.
+
+Visual Studio 2019 Solutuion: `.\src\PointOfSale.sln`\
+Point of sale implementation: `.\src\PointOfSale\PointOfSaleTerminal.cs`\
+Price calculation code: `.\src\PointOfSale\BusinessRules\OrderCalculator.cs`
+
+This code implementation is driven by the price per item property that is included for each pricing rule. This means that we can iterate lowest unit price to highest unit price, calculating the price for as many items as possible, and passing the unpriced items to the next pricing rule, totaling as we go.
+
+## Testing
+To ensure that the library code performs as expected, there is a unit test created that exercises the sales journey using the range of supplied purchases.
+
+To ensure that the unit test is not reporting false success, it is also exercised with the additional products added to the list, verifying that the price no longer matches, and also with the original list, but with a different price.
+
+The unit test code, and the source data are available:
+
+UnitTests (xUnit): `.\src\PointOfSale.Test\PointOfSaleTerminalTests.cs`\
+UnitTests Data Source: `.\src\PointOfSale.Test\Data\ShopingLists.cs`
+
 ## Design Decisions
 
 1. **Pricing Calculation** - This was the key decision which drove the implementation style of the source code.  The calculation needs to support the provided pricing rules, and to have awareness of its limitations.
